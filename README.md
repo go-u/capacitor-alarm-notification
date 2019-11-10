@@ -2,7 +2,7 @@
 [![Javascript](https://img.shields.io/badge/Capacitor-Javascript-gold.svg?style=flat)](https://capacitor.ionicframework.com/)
 [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat)](LICENSE)
 
-<p align="center"><img src="../logo.png" alt="Capacitor Keep Screen On logo"></p>
+<p align="center"><img src="docs/logo.png" alt="Capacitor Alarm Notification logo"></p>
 <h1 align="center">capacitor-alarm-notification</h1>
 
 # What's this?
