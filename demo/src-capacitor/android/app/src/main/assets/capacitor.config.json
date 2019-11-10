@@ -1,0 +1,10 @@
+{
+  "appId": "com.demo.capacitor.alarm.notification",
+  "appName": "plugin demo",
+  "bundledWebRuntime": false,
+  "npmClient": "yarn",
+  "webDir": "www",
+  "server": {
+    "url": "http://192.168.10.140:8080"
+  }
+}
