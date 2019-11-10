@@ -1,5 +1,12 @@
 
   <manifest xmlns:android="http://schemas.android.com/apk/res/android"
       package="com.go.capacitor.alarm.notification.capacitoralarmnotification">
+
+    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="com.android.alarm.permission.SET_ALARM"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+    <application>
+      <receiver android:name="com.go.capacitor.alarm.notification.TimedNotificationPublisher" />
+    </application>
   </manifest>
-  
