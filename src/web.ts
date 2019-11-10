@@ -1,5 +1,5 @@
 import { WebPlugin } from '@capacitor/core';
-import { CapacitorAlarmNotificationPlugin } from './definitions';
+import { AlarmSetResult, CapacitorAlarmNotificationPlugin } from './definitions';
 
 export class CapacitorAlarmNotificationWeb extends WebPlugin implements CapacitorAlarmNotificationPlugin {
   constructor() {
@@ -9,9 +9,14 @@ export class CapacitorAlarmNotificationWeb extends WebPlugin implements Capacito
     });
   }
 
-  async echo(options: { value: string }): Promise<{value: string}> {
-    console.log('ECHO', options);
-    return options;
+  // 5 min alarm : set(5 * 60)
+  // clear alarm : set(0)
+  async setAlarm(options: { sec: number, sound: boolean, title: string, text: string }): Promise<AlarmSetResult> {
+    console.log('setAlarm options: ', options);
+    return Promise.resolve({
+      sec: options.sec,
+      result: undefined
+    });
   }
 }
 

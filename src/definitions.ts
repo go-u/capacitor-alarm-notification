@@ -5,5 +5,16 @@ declare module "@capacitor/core" {
 }
 
 export interface CapacitorAlarmNotificationPlugin {
-  echo(options: { value: string }): Promise<{value: string}>;
+  setAlarm(options: { sec: number, sound: boolean, title: string, text: string }): Promise<AlarmSetResult>;
 }
+
+export class AlarmSetResultBool{
+  // return input value as it is
+  sec: number;
+  // return result
+  constructor(public result: boolean) {
+  }
+}
+
+export type AlarmSetResult = AlarmSetResultBool
+
