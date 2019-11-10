@@ -21,7 +21,12 @@ export default {
   },
   methods: {
     setAlarm: function (sec, soundMode) {
-      CapacitorAlarmNotification.setAlarm({ sec: sec, sound: soundMode, title: 'Boost', text: '時間です' })
+      CapacitorAlarmNotification.setAlarm({
+        sec: sec,
+        sound: soundMode,
+        title: 'Boost',
+        text: '時間です'
+      })
       // Alarm.setAndUpdate({ 'min': min })
         .then((res) => {
           console.log(res)
