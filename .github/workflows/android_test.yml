@@ -56,17 +56,17 @@ jobs:
         run: ./node_modules/.bin/appium --log-timestamp --log-no-colors --allow-insecure chromedriver_autodownload > appium.log &
 
       - name: Build with Gradle
-        run: gradle cleanTest test --tests "com.example.chrome.MobileChromeTest"
+        run: cd demo/src-capacitor/android/ && gradle compileJava
         continue-on-error: true
 
-      - name: Upload logs
-        uses: actions/upload-artifact@v1
-        with:
-          name: appium.log
-          path: appium.log
-
-      - name: Upload screenshots
-        uses: actions/upload-artifact@v1
-        with:
-          name: screenshots
-          path: screenshots
+#      - name: Upload logs
+#        uses: actions/upload-artifact@v1
+#        with:
+#          name: appium.log
+#          path: appium.log
+#
+#      - name: Upload screenshots
+#        uses: actions/upload-artifact@v1
+#        with:
+#          name: screenshots
+#          path: screenshots
