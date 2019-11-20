@@ -46,7 +46,6 @@ jobs:
 
       - name: Start AVD
         run: |
-#         create avd -n tempolary_emulator_name -k sdk_id
           echo "no" | sudo $ANDROID_HOME/tools/bin/avdmanager create avd -n ${EMULATOR_NAME} -k ${ANDROID_SDK_ID} --force
           sudo $ANDROID_HOME/emulator/emulator -list-avds
           echo "Starting emulator"
