@@ -53,7 +53,7 @@ jobs:
         run: cd demo && yarn install
 
       - name: Run Quasar
-        run: npx quasar dev
+        run: cd demo && npx quasar dev
 
 #      - name: Set up Appium
 #        run: npm install appium@1.15.0
