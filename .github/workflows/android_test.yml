@@ -40,5 +40,5 @@ jobs:
       - name: Start AVD
         run: |
           # create avd -n tempolary_emulator_name -k sdk_id
-          echo "no" | $ANDROID_HOME/tools/bin/avdmanager create avd -n xamarin_android_emulator -k ${ANDROID_SDK_ID} --force
+          echo "no" | sudo $ANDROID_HOME/tools/bin/avdmanager create avd -n xamarin_android_emulator -k ${ANDROID_SDK_ID} --force
           echo $ANDROID_HOME/emulator/emulator -list-avds
