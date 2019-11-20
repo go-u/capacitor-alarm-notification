@@ -36,7 +36,6 @@ jobs:
 
       - name: Install Android sdkmanager
         run: |
-          sudo ls /home/runner/work/capacitor-alarm-notification/capacitor-alarm-notification/demo/dist/capacitor/android
           sudo mkdir -p /root/.android && sudo touch /root/.android/repositories.cfg
           wget --quiet --output-document=android-sdk.zip https://dl.google.com/android/repository/sdk-tools-linux-${ANDROID_SDK_TOOLS}.zip
           sudo unzip -d $ANDROID_HOME android-sdk.zip > /dev/null
@@ -45,16 +44,19 @@ jobs:
         run: |
           echo "y" | sudo $ANDROID_HOME/tools/bin/sdkmanager --install ${ANDROID_SDK_ID}
 
-#      - name: Start AVD
-#        run: |
-#          # create avd -n tempolary_emulator_name -k sdk_id
-#          echo "no" | sudo $ANDROID_HOME/tools/bin/avdmanager create avd -n ${EMULATOR_NAME} -k ${ANDROID_SDK_ID} --force
-#          sudo $ANDROID_HOME/emulator/emulator -list-avds
-#          echo "Starting emulator"
-#          sudo nohup $ANDROID_HOME/emulator/emulator -avd ${EMULATOR_NAME} -no-snapshot > /dev/null 2>&1 &
-#          sudo $ANDROID_HOME/platform-tools/adb wait-for-device shell 'while [[ -z $(getprop sys.boot_completed | tr -d '\r') ]]; do sleep 1; done; input keyevent 82'
-#          sudo $ANDROID_HOME/platform-tools/adb devices
-#          echo "Emulator started"
+      - name: Start AVD
+        run: |
+#         create avd -n tempolary_emulator_name -k sdk_id
+          echo "no" | sudo $ANDROID_HOME/tools/bin/avdmanager create avd -n ${EMULATOR_NAME} -k ${ANDROID_SDK_ID} --force
+          sudo $ANDROID_HOME/emulator/emulator -list-avds
+          echo "Starting emulator"
+          sudo nohup $ANDROID_HOME/emulator/emulator -avd ${EMULATOR_NAME} -no-snapshot > /dev/null 2>&1 &
+          sudo $ANDROID_HOME/platform-tools/adb wait-for-device shell 'while [[ -z $(getprop sys.boot_completed | tr -d '\r') ]]; do sleep 1; done; input keyevent 82'
+          sudo $ANDROID_HOME/platform-tools/adb devices
+          echo "Emulator started"
+
+      - name: Install App to emulator
+        run: sudo adb install /home/runner/work/capacitor-alarm-notification/capacitor-alarm-notification/demo/dist/capacitor/android/app-release-unsigned.apk
 
 #      - name: Set up Appium
 #        run: npm install appium@1.15.0
