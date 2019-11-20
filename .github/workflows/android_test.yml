@@ -32,7 +32,7 @@ jobs:
           sudo mkdir -p /root/.android && sudo touch /root/.android/repositories.cfg
           wget --quiet --output-document=android-sdk.zip https://dl.google.com/android/repository/sdk-tools-linux-${ANDROID_SDK_TOOLS}.zip
           sudo unzip -d $ANDROID_HOME android-sdk.zip > /dev/null
-          echo "y" | $ANDROID_HOME/tools/bin/sdkmanager --install '${ANDROID_SDK_ID}'
+          echo "y" | sudo $ANDROID_HOME/tools/bin/sdkmanager --install '${ANDROID_SDK_ID}'
 
       - name: Install Android image
         run: |
