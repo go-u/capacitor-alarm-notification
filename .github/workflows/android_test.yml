@@ -9,6 +9,7 @@ jobs:
     env:
       ANDROID_SDK_TOOLS:    "4333796"
       ANDROID_SDK_ID:    "system-images;android-28;google_apis;x86_64"
+      EMULATOR_NAME:    "emulator"
 
     steps:
       - uses: actions/checkout@v1
@@ -40,5 +41,10 @@ jobs:
       - name: Start AVD
         run: |
           # create avd -n tempolary_emulator_name -k sdk_id
-          echo "no" | sudo $ANDROID_HOME/tools/bin/avdmanager create avd -n xamarin_android_emulator -k ${ANDROID_SDK_ID} --force
-          echo $ANDROID_HOME/emulator/emulator -list-avds
+          echo "no" | sudo $ANDROID_HOME/tools/bin/avdmanager create avd -n ${EMULATOR_NAME} -k ${ANDROID_SDK_ID} --force
+          sudo $ANDROID_HOME/emulator/emulator -list-avds
+          echo "Starting emulator"
+          sudo nohup $ANDROID_HOME/emulator/emulator -avd ${EMULATOR_NAME} -no-snapshot > /dev/null 2>&1 &
+          sudo $ANDROID_HOME/platform-tools/adb wait-for-device shell 'while [[ -z $(getprop sys.boot_completed | tr -d '\r') ]]; do sleep 1; done; input keyevent 82'
+          sudo $ANDROID_HOME/platform-tools/adb devices
+          echo "Emulator started"
