@@ -50,7 +50,7 @@ jobs:
 #          echo "Emulator started"
 
       - name: Insatall Quasar
-        run: cd demo && npm install
+        run: cd demo && yarn install
 
       - name: Run Quasar
         run: npx quasar dev
