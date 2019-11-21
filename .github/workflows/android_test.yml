@@ -9,7 +9,7 @@ jobs:
     env:
       USER: "runner"
       ANDROID_SDK_TOOLS:    "4333796"
-      ANDROID_SDK_ID:    "system-images;android-28;google_apis;x86_64"
+      ANDROID_SDK_ID:    "system-images;android-28;google_apis;x86"
       EMULATOR_NAME:    "emu"
     steps:
       - name: Setup And Confirm Env Value
@@ -65,7 +65,6 @@ jobs:
 
       - name: Start Emulator
         run: |
-          sudo apt-get install libpulse0:i386
           ${ANDROID_HOME}/tools/emulator -avd ${EMULATOR_NAME} -no-snapshot
           ${ANDROID_HOME}/tools/emulator -avd ${EMULATOR_NAME} -no-snapshot > /dev/null 2>&1 &
 
