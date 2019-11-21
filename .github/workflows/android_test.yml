@@ -47,6 +47,7 @@ jobs:
       - name: Start AVD
         run: |
           echo "Creating emulator"
+          sudo $ANDROID_HOME/platform-tools/adb devices
           echo "no" | sudo $ANDROID_HOME/tools/bin/avdmanager create avd -n ${EMULATOR_NAME} -k ${ANDROID_SDK_ID} --force
           sudo $ANDROID_HOME/emulator/emulator -list-avds
           echo "Boot emulator"
