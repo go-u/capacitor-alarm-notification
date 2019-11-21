@@ -45,7 +45,7 @@ jobs:
         run: |
           wget --quiet --output-document=android-sdk.zip https://dl.google.com/android/repository/sdk-tools-linux-${ANDROID_SDK_TOOLS}.zip
           mkdir -p ${ANDROID_SDK_HOME}
-          unzip android-sdk.zip -d /home/runner
+          unzip android-sdk.zip -d ${ANDROID_SDK_HOME}/..
 
       - name: Download and Install Android image
         run: |
