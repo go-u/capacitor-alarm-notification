@@ -87,8 +87,8 @@ jobs:
       - name: Upload screenshots
         uses: actions/upload-artifact@v1
         with:
-          name: screenshots
-          path: screenshots
+          name: screenshot.png
+          path: screenshot.png
 
 
 #name: Android Test

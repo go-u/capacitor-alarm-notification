@@ -18,6 +18,7 @@ const opts = {
 
 async function main () {
   const client = await wdio.remote(opts);
+  client.saveScreenshot('./screenshot.png');
 
   // const field = await client.$("android.widget.EditText");
   // await field.setValue("Hello World!");
