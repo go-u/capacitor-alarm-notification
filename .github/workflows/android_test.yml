@@ -55,14 +55,14 @@ jobs:
           echo "Emulator started"
 
       - name: Install App to emulator
-        run: sudo adb install /home/runner/work/capacitor-alarm-notification/capacitor-alarm-notification/demo/dist/capacitor/android/app-release-unsigned.apk
+        run: sudo $ANDROID_HOME/platform-tools/adb install /home/runner/work/capacitor-alarm-notification/capacitor-alarm-notification/demo/dist/capacitor/android/app-release-unsigned.apk
 
-#      - name: Set up Appium
-#        run: npm install appium@1.15.0
+      - name: Set up Appium
+        run: sudo npm install appium -g
 #
-#      - name: Run Appium Server
-#        run: ./node_modules/.bin/appium --log-timestamp --log-no-colors --allow-insecure chromedriver_autodownload > appium.log &
-#
+      - name: Run Appium Server
+        run: sudo appium --log-timestamp --log-no-colors --allow-insecure chromedriver_autodownload > appium.log &
+
 #      - name: Build with Gradle
 #        run: cd demo/src-capacitor/android/ && gradle compileJava
 #        continue-on-error: true
