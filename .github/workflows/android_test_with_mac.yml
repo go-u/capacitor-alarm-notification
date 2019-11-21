@@ -57,7 +57,7 @@ jobs:
           echo "Emulator started"
 
       - name: Install apk
-        run: $ANDROID_HOME/platform-tools/adb install /home/runner/work/capacitor-alarm-notification/capacitor-alarm-notification/demo/dist/capacitor/android/app-release-unsigned.apk
+        run: $ANDROID_HOME/platform-tools/adb install /home/runner/work/capacitor-alarm-notification/demo/dist/capacitor/android/app-release-unsigned.apk
 
       - name: Build with Gradle
         run: gradle cleanTest test --tests "com.example.chrome.MobileChromeTest"
