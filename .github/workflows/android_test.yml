@@ -34,7 +34,9 @@ jobs:
 #      - name: Build with Quasar
 #        run: cd demo && npx quasar build --mode capacitor --target android
       - name: env val
-        run : echo $ANDROID_SDK_HOME
+        run : |
+          echo $HOME
+          echo $ANDROID_SDK_HOME
 
       - name: Install Android sdkmanager
         run: |
