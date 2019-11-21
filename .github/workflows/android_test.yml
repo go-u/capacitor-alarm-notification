@@ -18,6 +18,7 @@ jobs:
           whoami
           echo ${ANDROID_SDK_HOME}
           echo ${ANDROID_HOME}
+          ls ${ANDROID_HOME}
 
       - uses: actions/checkout@v1
 #      - uses: actions/setup-node@v1
@@ -68,17 +69,20 @@ jobs:
           echo "Create emulator list"
           ${ANDROID_SDK_HOME}/emulator -list-avds
 
-      - name: Start AVD
+      - name: Start Emulator
         run: |
           echo "Boot emulator"
           sudo ${ANDROID_HOME}/emulator/emulator -avd ${EMULATOR_NAME} -no-snapshot
           sudo ${ANDROID_HOME}/emulator/emulator -avd ${EMULATOR_NAME} -no-snapshot > /dev/null 2>&1 &
+
+      - name: Connect Emulator to ADB
+        run: |
           sudo ${ANDROID_HOME}/platform-tools/adb wait-for-device shell 'while [[ -z $(getprop sys.boot_completed | tr -d '\r') ]]; do sleep 1; done; input keyevent 82'
           sudo ${ANDROID_HOME}/platform-tools/adb devices
-          echo "Emulator started"
+          echo "Emulator Connected"
 
       - name: Install App to emulator
-        run: sudo $ANDROID_HOME/platform-tools/adb install /home/runner/work/capacitor-alarm-notification/capacitor-alarm-notification/demo/dist/capacitor/android/app-release-unsigned.apk
+        run: sudo ${ANDROID_HOME}/platform-tools/adb install /home/runner/work/capacitor-alarm-notification/capacitor-alarm-notification/demo/dist/capacitor/android/app-release-unsigned.apk
 
       - name: Set up Appium
         run: sudo npm install appium -g
