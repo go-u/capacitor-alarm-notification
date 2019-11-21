@@ -11,6 +11,7 @@ const opts = {
     deviceName: "emu",
     app: "demo/dist/capacitor/android/app-debug.apk",
     appPackage: "com.demo.capacitor.alarm.notification",
+    appActivity: "com.demo.capacitor.alarm.notification.MainActivity",
     automationName: "UiAutomator2"
   }
 };
