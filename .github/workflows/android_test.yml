@@ -17,11 +17,6 @@ jobs:
           whoami
           echo ${ANDROID_HOME}
 
-# https://askubuntu.com/questions/637113/unable-to-locate-package-lib32bz2-1-0
-      - name: Install Android Studio Dependencies
-        run : |
-          sudo locate libcrypto.so.1.0.0
-
       - uses: actions/checkout@v1
 #      - uses: actions/setup-node@v1
 #        with:
@@ -70,7 +65,7 @@ jobs:
 
       - name: Start Emulator
         run: |
-          ${ANDROID_HOME}/tools/emulator -avd ${EMULATOR_NAME} -no-snapshot
+          sudo ${ANDROID_HOME}/tools/emulator -avd ${EMULATOR_NAME} -no-snapshot
           ${ANDROID_HOME}/tools/emulator -avd ${EMULATOR_NAME} -no-snapshot > /dev/null 2>&1 &
 
       - name: Connect Emulator to ADB
