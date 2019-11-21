@@ -54,24 +54,19 @@ jobs:
 
       - name: Create AVD
         run: |
-          echo ANDROID_HOME
-          ls ${ANDROID_HOME}
-          echo ANDROID_HOME/tools
-          ls ${ANDROID_HOME}/tools/
-          echo "Creating emulator"
-          echo "no" | ${ANDROID_SDK_HOME}/tools/bin/avdmanager create avd -n ${EMULATOR_NAME} -k ${ANDROID_SDK_ID} -f
+          echo "no" | ${ANDROID_HOME}/tools/bin/avdmanager create avd -n ${EMULATOR_NAME} -k ${ANDROID_SDK_ID} -f
 
       - name: Confirm Created AVD List
         run: |
           echo "Installed emulator list"
-          ${ANDROID_SDK_HOME}/tools/bin/sdkmanager --list
+          ${ANDROID_HOME}/tools/bin/sdkmanager --list
           echo "Create emulator list"
-          ${ANDROID_SDK_HOME}/tools/emulator -list-avds
+          ${ANDROID_HOME}/tools/emulator -list-avds
 
       - name: Start Emulator
         run: |
-          ${ANDROID_SDK_HOME}/tools/emulator -avd ${EMULATOR_NAME} -no-snapshot
-          ${ANDROID_SDK_HOME}/tools/emulator -avd ${EMULATOR_NAME} -no-snapshot > /dev/null 2>&1 &
+          ${ANDROID_HOME}/tools/emulator -avd ${EMULATOR_NAME} -no-snapshot
+          ${ANDROID_HOME}/tools/emulator -avd ${EMULATOR_NAME} -no-snapshot > /dev/null 2>&1 &
 
       - name: Connect Emulator to ADB
         run: |
