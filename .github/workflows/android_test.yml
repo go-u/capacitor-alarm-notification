@@ -14,6 +14,8 @@ jobs:
     steps:
       - name: Setup And Confirm Env Value
         run : |
+          sudo dpkg --add-architecture i386
+          sudo apt-get update
           sudo apt-get install lib32z1 lib32ncurses5 libbz2-1.0:i386 lib32stdc++6
           whoami
           echo ${ANDROID_HOME}
