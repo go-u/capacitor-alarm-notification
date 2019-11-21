@@ -18,7 +18,7 @@ const opts = {
 
 async function main () {
   const client = await wdio.remote(opts);
-  client.saveScreenshot('./screenshot.png');
+  client.saveScreenshot('/Users/runner/runners/2.160.2/work/capacitor-alarm-notification/capacitor-alarm-notification/screenshot.png');
 
   // const field = await client.$("android.widget.EditText");
   // await field.setValue("Hello World!");
