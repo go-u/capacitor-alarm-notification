@@ -42,13 +42,15 @@ jobs:
 
       - name: Install Android image
         run: |
-          echo "y" | sudo $ANDROID_HOME/tools/bin/sdkmanager --install ${ANDROID_SDK_ID}
+          echo "Install Android image"
+          echo "y" | sudo $ANDROID_HOME/tools/bin/sdkmanager --install ${ANDROID_SDK_ID} &
 
       - name: Start AVD
         run: |
           echo "Creating emulator"
           sudo $ANDROID_HOME/platform-tools/adb devices
           echo "no" | sudo $ANDROID_HOME/tools/bin/avdmanager create avd -n emu -k "system-images;android-28;google_apis;x86_64" --force
+          echo "Create emulator list"
           sudo $ANDROID_HOME/emulator/emulator -list-avds
           echo "Boot emulator"
           sudo nohup $ANDROID_HOME/emulator/emulator -avd ${EMULATOR_NAME} -no-snapshot > /dev/null 2>&1 &
