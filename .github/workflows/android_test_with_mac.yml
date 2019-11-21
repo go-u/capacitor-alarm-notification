@@ -14,7 +14,7 @@ jobs:
       ANDROID_SDK_ID:    "system-images;android-28;google_apis;x86_64"
       EMULATOR_NAME:    "emu"
 
-      steps:
+    steps:
       - name: Setup And Confirm Env Value
         run : |
           whoami
