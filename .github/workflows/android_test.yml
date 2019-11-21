@@ -9,7 +9,7 @@ jobs:
     env:
       ANDROID_SDK_TOOLS:    "4333796"
       ANDROID_SDK_ID:    "system-images;android-28;google_apis;x86_64"
-      EMULATOR_NAME:    "emulator"
+      EMULATOR_NAME:    "emu"
 
     steps:
       - uses: actions/checkout@v1
@@ -43,7 +43,7 @@ jobs:
       - name: Install Android image
         run: |
           echo "Install Android image"
-          echo "y" | sudo $ANDROID_HOME/tools/bin/sdkmanager --install ${ANDROID_SDK_ID} > /dev/null 2>&1
+          echo "y" | sudo $ANDROID_HOME/tools/bin/sdkmanager --install "system-images;android-28;google_apis;x86_64" > /dev/null 2>&1
 
       - name: Start AVD
         run: |
