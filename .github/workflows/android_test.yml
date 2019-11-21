@@ -10,7 +10,7 @@ jobs:
       USER: "runner"
       ANDROID_SDK_TOOLS:    "4333796"
       ANDROID_SDK_ID:    "system-images;android-28;google_apis;x86_64"
-      ANDROID_SDK_HOME: ~/tools
+      ANDROID_SDK_HOME: "~/tools"
       EMULATOR_NAME:    "emu"
     steps:
       - name: Confirm Env Value
@@ -48,20 +48,20 @@ jobs:
 
       - name: Download and Install Android image
         run: |
-          echo "y" | tools/bin/sdkmanager --install ${ANDROID_SDK_ID} > /dev/null 2>&1
+          echo "y" | $ANDROID_SDK_HOME/bin/sdkmanager --install ${ANDROID_SDK_ID} > /dev/null 2>&1
 
       - name: Create AVD
         run: |
           sudo $ANDROID_HOME/platform-tools/adb devices
           echo "Creating emulator"
-          echo "no" | tools/bin/avdmanager create avd -n ${EMULATOR_NAME} -k ${ANDROID_SDK_ID} -f
+          echo "no" | $ANDROID_SDK_HOME/bin/avdmanager create avd -n ${EMULATOR_NAME} -k ${ANDROID_SDK_ID} -f
 
       - name: Confirm Created AVD List
         run: |
           echo "Installed emulator list"
-          tools/bin/sdkmanager --list
+          $ANDROID_SDK_HOME/bin/sdkmanager --list
           echo "Create emulator list"
-          sudo $ANDROID_HOME/emulator/emulator -list-avds
+          $ANDROID_SDK_HOME/emulator/emulator -list-avds
 
       - name: Start AVD
         run: |
