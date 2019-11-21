@@ -10,14 +10,14 @@ jobs:
       USER: "runner"
       ANDROID_SDK_TOOLS:    "4333796"
       ANDROID_SDK_ID:    "system-images;android-28;google_apis;x86_64"
+      ANDROID_SDK_HOME:  "/home/runner/tools"
       EMULATOR_NAME:    "emu"
     steps:
       - name: Setup And Confirm Env Value
         run : |
           whoami
-          export ANDROID_SDK_HOME=~/tools
           echo ${ANDROID_SDK_HOME}
-          echo $ANDROID_HOME
+          echo ${ANDROID_HOME}
 
       - uses: actions/checkout@v1
 #      - uses: actions/setup-node@v1
