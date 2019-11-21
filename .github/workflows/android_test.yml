@@ -50,8 +50,8 @@ jobs:
           echo "Creating emulator"
           echo "no" | sudo $ANDROID_HOME/tools/bin/avdmanager create avd -n emu -k "system-images;android-28;google_apis;x86_64" --force
           echo "Installed emulator list"
-          sudo $ANDROID_HOME/tools/bin/avdmanager --list
-          $ANDROID_HOME/tools/bin/avdmanager --list
+          sudo $ANDROID_HOME/tools/bin/sdkmanager --list
+          $ANDROID_HOME/tools/bin/sdkmanager --list
           echo "Create emulator list"
           sudo $ANDROID_HOME/emulator/emulator -list-avds
           $ANDROID_HOME/emulator/emulator -list-avds
