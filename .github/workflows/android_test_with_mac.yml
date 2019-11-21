@@ -1,0 +1,42 @@
+name: Android Test With Mac
+
+on: [push]
+
+jobs:
+  build:
+    name: Mobile Chrome Test
+    runs-on: macOS-10.14
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v1
+      - name: Set up Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'
+      - name: Run Android Emulator
+        run: |
+          echo "y" | $ANDROID_HOME/tools/bin/sdkmanager --install 'system-images;android-27;google_apis;x86'
+          echo "no" | $ANDROID_HOME/tools/bin/avdmanager create avd -n xamarin_android_emulator -k 'system-images;android-27;google_apis;x86' --force
+          echo $ANDROID_HOME/emulator/emulator -list-avds
+          echo "Starting emulator"
+          nohup $ANDROID_HOME/emulator/emulator -avd xamarin_android_emulator -no-snapshot > /dev/null 2>&1 &
+          $ANDROID_HOME/platform-tools/adb wait-for-device shell 'while [[ -z $(getprop sys.boot_completed | tr -d '\r') ]]; do sleep 1; done; input keyevent 82'
+          $ANDROID_HOME/platform-tools/adb devices
+          echo "Emulator started"
+      - name: Set up Appium
+        run: npm install appium@1.15.0
+      - name: Run Appium Server
+        run: ./node_modules/.bin/appium --log-timestamp --log-no-colors --allow-insecure chromedriver_autodownload > appium.log &
+      - name: Build with Gradle
+        run: gradle cleanTest test --tests "com.example.chrome.MobileChromeTest"
+        continue-on-error: true
+      - name: Upload logs
+        uses: actions/upload-artifact@v1
+        with:
+          name: appium.log
+          path: appium.log
+      - name: Upload screenshots
+        uses: actions/upload-artifact@v1
+        with:
+          name: screenshots
+          path: screenshots

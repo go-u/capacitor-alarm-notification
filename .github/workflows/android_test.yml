@@ -1,105 +1,105 @@
-name: Android Test
-
-on: [push]
-
-jobs:
-  build:
-
-    runs-on: ubuntu-latest
-    env:
-      USER: "runner"
-      ANDROID_SDK_TOOLS:    "4333796"
-      ANDROID_SDK_ID:    "system-images;android-28;google_apis;x86_64"
-      EMULATOR_NAME:    "emu"
-    steps:
-      - name: Setup And Confirm Env Value
-        run : |
-          whoami
-          echo ${ANDROID_HOME}
-
-      - uses: actions/checkout@v1
-#      - uses: actions/setup-node@v1
-#        with:
-#          node-version: '12.x'
-#          registry-url: 'https://registry.npmjs.org'
+#name: Android Test
 #
-      - name: set up JDK 1.8
-        uses: actions/setup-java@v1
-        with:
-          java-version: 1.8
-
-#      - name: BuildCapacitorPlugin(This plugin itself)
+#on: [push]
+#
+#jobs:
+#  build:
+#
+#    runs-on: ubuntu-latest
+#    env:
+#      USER: "runner"
+#      ANDROID_SDK_TOOLS:    "4333796"
+#      ANDROID_SDK_ID:    "system-images;android-28;google_apis;armeabi-v7a"
+#      EMULATOR_NAME:    "emu"
+#    steps:
+#      - name: Setup And Confirm Env Value
+#        run : |
+#          whoami
+#          echo ${ANDROID_HOME}
+#
+#      - uses: actions/checkout@v1
+##      - uses: actions/setup-node@v1
+##        with:
+##          node-version: '12.x'
+##          registry-url: 'https://registry.npmjs.org'
+##
+#      - name: set up JDK 1.8
+#        uses: actions/setup-java@v1
+#        with:
+#          java-version: 1.8
+#
+##      - name: BuildCapacitorPlugin(This plugin itself)
+##        run: |
+##          npm install
+##          npm run build
+##
+##      - name: Insatall Quasar
+##        run: cd demo && yarn install
+##
+##      - name: Build with Quasar
+##        run: cd demo && npx quasar build --mode capacitor --target android
+#
+#      - name: Change privillage of ANDROID_HOME (Enabled Normal user)
+#        run: whoami=$(whoami) && sudo chown -R "$(whoami)" ${ANDROID_HOME}
+#
+#      - name: Download Android sdkmanager
 #        run: |
-#          npm install
-#          npm run build
+#          wget --quiet --output-document=android-sdk.zip https://dl.google.com/android/repository/sdk-tools-linux-${ANDROID_SDK_TOOLS}.zip
+#          unzip android-sdk.zip -d ${ANDROID_HOME}
 #
-#      - name: Insatall Quasar
-#        run: cd demo && yarn install
+#      - name: Download and Install Android image
+#        run: |
 #
-#      - name: Build with Quasar
-#        run: cd demo && npx quasar build --mode capacitor --target android
-
-      - name: Change privillage of ANDROID_HOME (Enabled Normal user)
-        run: whoami=$(whoami) && sudo chown -R "$(whoami)" ${ANDROID_HOME}
-
-      - name: Download Android sdkmanager
-        run: |
-          wget --quiet --output-document=android-sdk.zip https://dl.google.com/android/repository/sdk-tools-linux-${ANDROID_SDK_TOOLS}.zip
-          unzip android-sdk.zip -d ${ANDROID_HOME}
-
-      - name: Download and Install Android image
-        run: |
-
-          echo "y" | ${ANDROID_HOME}/tools/bin/sdkmanager --install ${ANDROID_SDK_ID} > /dev/null 2>&1
-
-      - name: Create AVD
-        run: |
-          echo "no" | ${ANDROID_HOME}/tools/bin/avdmanager create avd -n ${EMULATOR_NAME} -k ${ANDROID_SDK_ID} -f
-
-      - name: Confirm Created AVD List
-        run: |
-          echo "Installed emulator list"
-          ${ANDROID_HOME}/tools/bin/sdkmanager --list
-          echo "Create emulator list"
-          ${ANDROID_HOME}/tools/emulator -list-avds
-
-      - name: Start Emulator
-        run: |
-          git clone https://gitlab.freedesktop.org/pulseaudio/pulseaudio.git
-          cd pulseaudio && ./bootstrap.sh
-          cd pulseaudio && make
-          cd pulseaudio && sudo make install
-          cp ${ANDROID_HOME}/tools/emulator ${ANDROID_HOME}/emulator/emulator
-          cd ${ANDROID_HOME}/emulator && ./emulator -avd ${EMULATOR_NAME} -no-snapshot
-          cd ${ANDROID_HOME}/emulator && ./emulator -avd ${EMULATOR_NAME} -no-snapshot > /dev/null 2>&1 &
-
-      - name: Connect Emulator to ADB
-        run: |
-          ${ANDROID_HOME}/platform-tools/adb wait-for-device shell 'while [[ -z $(getprop sys.boot_completed | tr -d '\r') ]]; do sleep 1; done; input keyevent 82'
-          ${ANDROID_HOME}/platform-tools/adb devices
-          echo "Emulator Connected"
-
-      - name: Install App to emulator
-        run: sudo ${ANDROID_HOME}/platform-tools/adb install /home/runner/work/capacitor-alarm-notification/capacitor-alarm-notification/demo/dist/capacitor/android/app-release-unsigned.apk
-
-      - name: Set up Appium
-        run: sudo npm install appium -g
+#          echo "y" | ${ANDROID_HOME}/tools/bin/sdkmanager --install ${ANDROID_SDK_ID} > /dev/null 2>&1
 #
-      - name: Run Appium Server
-        run: sudo appium --log-timestamp --log-no-colors --allow-insecure chromedriver_autodownload > appium.log &
-
-#      - name: Build with Gradle
-#        run: cd demo/src-capacitor/android/ && gradle compileJava
-#        continue-on-error: true
-
-#      - name: Upload logs
-#        uses: actions/upload-artifact@v1
-#        with:
-#          name: appium.log
-#          path: appium.log
+#      - name: Create AVD
+#        run: |
+#          echo "no" | ${ANDROID_HOME}/tools/bin/avdmanager create avd -n ${EMULATOR_NAME} -k ${ANDROID_SDK_ID} -f
 #
-#      - name: Upload screenshots
-#        uses: actions/upload-artifact@v1
-#        with:
-#          name: screenshots
-#          path: screenshots
+#      - name: Confirm Created AVD List
+#        run: |
+#          echo "Installed emulator list"
+#          ${ANDROID_HOME}/tools/bin/sdkmanager --list
+#          echo "Create emulator list"
+#          ${ANDROID_HOME}/tools/emulator -list-avds
+#
+#      - name: Start Emulator
+#        run: |
+#          git clone https://gitlab.freedesktop.org/pulseaudio/pulseaudio.git
+#          cd pulseaudio && ./bootstrap.sh
+#          cd pulseaudio && make
+#          cd pulseaudio && sudo make install
+#          cp ${ANDROID_HOME}/tools/emulator ${ANDROID_HOME}/emulator/emulator
+#          cd ${ANDROID_HOME}/emulator && ./emulator -avd ${EMULATOR_NAME} -no-snapshot
+#          cd ${ANDROID_HOME}/emulator && ./emulator -avd ${EMULATOR_NAME} -no-snapshot > /dev/null 2>&1 &
+#
+#      - name: Connect Emulator to ADB
+#        run: |
+#          ${ANDROID_HOME}/platform-tools/adb wait-for-device shell 'while [[ -z $(getprop sys.boot_completed | tr -d '\r') ]]; do sleep 1; done; input keyevent 82'
+#          ${ANDROID_HOME}/platform-tools/adb devices
+#          echo "Emulator Connected"
+#
+#      - name: Install App to emulator
+#        run: sudo ${ANDROID_HOME}/platform-tools/adb install /home/runner/work/capacitor-alarm-notification/capacitor-alarm-notification/demo/dist/capacitor/android/app-release-unsigned.apk
+#
+#      - name: Set up Appium
+#        run: sudo npm install appium -g
+##
+#      - name: Run Appium Server
+#        run: sudo appium --log-timestamp --log-no-colors --allow-insecure chromedriver_autodownload > appium.log &
+#
+##      - name: Build with Gradle
+##        run: cd demo/src-capacitor/android/ && gradle compileJava
+##        continue-on-error: true
+#
+##      - name: Upload logs
+##        uses: actions/upload-artifact@v1
+##        with:
+##          name: appium.log
+##          path: appium.log
+##
+##      - name: Upload screenshots
+##        uses: actions/upload-artifact@v1
+##        with:
+##          name: screenshots
+##          path: screenshots
