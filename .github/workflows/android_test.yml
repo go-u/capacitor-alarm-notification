@@ -66,9 +66,9 @@ jobs:
       - name: Start Emulator
         run: |
           git clone https://gitlab.freedesktop.org/pulseaudio/pulseaudio.git
-          ./bootstrap.sh
-          make
-          sudo make install
+          cd pulseaudio && ./bootstrap.sh
+          cd pulseaudio && make
+          cd pulseaudio && sudo make install
           cp ${ANDROID_HOME}/tools/emulator ${ANDROID_HOME}/emulator/emulator
           cd ${ANDROID_HOME}/emulator && ./emulator -avd ${EMULATOR_NAME} -no-snapshot
           cd ${ANDROID_HOME}/emulator && ./emulator -avd ${EMULATOR_NAME} -no-snapshot > /dev/null 2>&1 &
