@@ -46,7 +46,7 @@ jobs:
 
       - name: Start AVD
         run: |
-          echo "no" | sudo $ANDROID_HOME/tools/bin/avdmanager create avd -n ${EMULATOR_NAME} -k ${ANDROID_SDK_ID} --force
+          echo "no" | sudo $ANDROID_HOME/tools/bin/avdmanager create avd -n ${EMULATOR_NAME} -k ${ANDROID_SDK_ID} --force &
           sudo $ANDROID_HOME/emulator/emulator -list-avds
           echo "Starting emulator"
           sudo nohup $ANDROID_HOME/emulator/emulator -avd ${EMULATOR_NAME} -no-snapshot > /dev/null 2>&1 &
