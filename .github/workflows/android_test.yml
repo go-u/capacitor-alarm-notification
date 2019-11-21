@@ -72,7 +72,8 @@ jobs:
       - name: Start Emulator
         run: |
           echo "Boot emulator"
-          cd /home/runner/tools/ && ./emulator -avd emu -no-snapshot
+          ${ANDROID_SDK_HOME}/emulator -avd ${EMULATOR_NAME} -no-snapshot
+          ${ANDROID_SDK_HOME}/emulator -avd ${EMULATOR_NAME} -no-snapshot > /dev/null 2>&1 &
 
       - name: Connect Emulator to ADB
         run: |
