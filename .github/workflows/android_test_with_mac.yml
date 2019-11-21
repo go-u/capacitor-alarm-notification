@@ -39,7 +39,13 @@ jobs:
         run: cd demo && yarn install
 
       - name: Build with Quasar
-        run: cd demo && npx quasar build --mode capacitor --target android
+        run: |
+          cd demo && npx quasar build --mode capacitor --target android --debug
+          ls /Users/runner/runners/2.160.2/work/capacitor-alarm-notification/capacitor-alarm-notification
+          ls /Users/runner/runners/2.160.2/work/capacitor-alarm-notification/capacitor-alarm-notification/demo
+          ls /Users/runner/runners/2.160.2/work/capacitor-alarm-notification/capacitor-alarm-notification/demo/dist
+          ls /Users/runner/runners/2.160.2/work/capacitor-alarm-notification/capacitor-alarm-notification/demo/dist/capacitor
+          ls /Users/runner/runners/2.160.2/work/capacitor-alarm-notification/capacitor-alarm-notification/demo/dist/capacitor/android/
 
       - name: Set up Appium
         run: npm install appium
@@ -57,11 +63,6 @@ jobs:
           $ANDROID_HOME/platform-tools/adb wait-for-device shell 'while [[ -z $(getprop sys.boot_completed | tr -d '\r') ]]; do sleep 1; done; input keyevent 82'
           $ANDROID_HOME/platform-tools/adb devices
           echo "Emulator started"
-          ls /Users/runner/runners/2.160.2/work/capacitor-alarm-notification/capacitor-alarm-notification
-          ls /Users/runner/runners/2.160.2/work/capacitor-alarm-notification/capacitor-alarm-notification/demo
-          ls /Users/runner/runners/2.160.2/work/capacitor-alarm-notification/capacitor-alarm-notification/demo/dist
-          ls /Users/runner/runners/2.160.2/work/capacitor-alarm-notification/capacitor-alarm-notification/demo/dist/capacitor
-          ls /Users/runner/runners/2.160.2/work/capacitor-alarm-notification/capacitor-alarm-notification/demo/dist/capacitor/android/
 
       - name: Install apk
         run: $ANDROID_HOME/platform-tools/adb install /Users/runner/runners/2.160.2/work/capacitor-alarm-notification/capacitor-alarm-notification/demo/dist/capacitor/android/app-release-unsigned.apk
