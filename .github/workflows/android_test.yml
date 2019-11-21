@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       ANDROID_SDK_TOOLS:    "4333796"
-      ANDROID_SDK_ID:    "system-images;android-28;google_apis;x86_64"
+      ANDROID_SDK_ID:    "system-images;android-28;google_apis;x86"
       EMULATOR_NAME:    "emulator"
 
     steps:
