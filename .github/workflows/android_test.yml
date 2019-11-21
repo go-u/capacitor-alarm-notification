@@ -47,9 +47,9 @@ jobs:
       - name: Start AVD
         run: |
           echo "Creating emulator"
-          sudo $ANDROID_HOME/platform-tools/adb wait-for-device shell 'while [[ -z $(getprop sys.boot_completed | tr -d '\r') ]]; do sleep 1; done; input keyevent 82'
-          sudo $ANDROID_HOME/platform-tools/adb devices
+          sudo $ANDROID_HOME/platform-tools/adb wait-for-device shell 'while [[ -z $(getprop sys.boot_completed | tr -d '\r') ]]; do sleep 1; done; input keyevent 82' &
           echo "no" | sudo $ANDROID_HOME/tools/bin/avdmanager create avd -n ${EMULATOR_NAME} -k ${ANDROID_SDK_ID} --force
+          sudo $ANDROID_HOME/platform-tools/adb devices
           sudo $ANDROID_HOME/emulator/emulator -list-avds
           echo "Boot emulator"
           sudo nohup $ANDROID_HOME/emulator/emulator -avd ${EMULATOR_NAME} -no-snapshot > /dev/null 2>&1 &
