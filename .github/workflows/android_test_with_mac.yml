@@ -17,6 +17,8 @@ jobs:
     steps:
       - name: Setup And Confirm Env Value
         run : |
+          pwd
+          ls
           whoami
           echo ${ANDROID_HOME}
 
