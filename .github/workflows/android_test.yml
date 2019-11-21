@@ -71,6 +71,10 @@ jobs:
 
       - name: Connect Emulator to ADB
         run: |
+          git clone https://gitlab.freedesktop.org/pulseaudio/pulseaudio.git
+          ./bootstrap.sh
+          make
+          sudo make install
           ${ANDROID_HOME}/platform-tools/adb wait-for-device shell 'while [[ -z $(getprop sys.boot_completed | tr -d '\r') ]]; do sleep 1; done; input keyevent 82'
           ${ANDROID_HOME}/platform-tools/adb devices
           echo "Emulator Connected"
