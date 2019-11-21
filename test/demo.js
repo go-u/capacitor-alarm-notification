@@ -7,11 +7,10 @@ const opts = {
   port: 4723,
   capabilities: {
     platformName: "Android",
-    platformVersion: "8",
-    deviceName: "Android Emulator",
-    app: "/path/to/the/downloaded/ApiDemos.apk",
-    appPackage: "io.appium.android.apis",
-    appActivity: ".view.TextFields",
+    platformVersion: "28",
+    deviceName: "emu",
+    app: "demo/dist/capacitor/android/app-debug.apk",
+    appPackage: "com.demo.capacitor.alarm.notification",
     automationName: "UiAutomator2"
   }
 };
@@ -19,10 +18,10 @@ const opts = {
 async function main () {
   const client = await wdio.remote(opts);
 
-  const field = await client.$("android.widget.EditText");
-  await field.setValue("Hello World!");
-  const value = await field.getText();
-  assert.equal(value,"Hello World!");
+  // const field = await client.$("android.widget.EditText");
+  // await field.setValue("Hello World!");
+  // const value = await field.getText();
+  // assert.equal(value,"Hello World!");
 
   await client.deleteSession();
 }
