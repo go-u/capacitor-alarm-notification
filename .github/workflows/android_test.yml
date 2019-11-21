@@ -10,7 +10,7 @@ jobs:
       USER: "runner"
       ANDROID_SDK_TOOLS:    "4333796"
       ANDROID_SDK_ID:    "system-images;android-28;google_apis;x86_64"
-      ANDROID_SDK_HOME: "~/tools"
+      ANDROID_SDK_HOME: ~/tools
       EMULATOR_NAME:    "emu"
     steps:
       - name: Confirm Env Value
