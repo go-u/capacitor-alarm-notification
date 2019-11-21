@@ -61,7 +61,7 @@ jobs:
           echo "Installed emulator list"
           $ANDROID_SDK_HOME/bin/sdkmanager --list
           echo "Create emulator list"
-          $ANDROID_SDK_HOME/emulator/emulator -list-avds
+          $ANDROID_SDK_HOME/emulator -list-avds
 
       - name: Start AVD
         run: |
