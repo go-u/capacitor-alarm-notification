@@ -39,29 +39,31 @@ jobs:
 #      - name: Build with Quasar
 #        run: cd demo && npx quasar build --mode capacitor --target android
 
+      - name: Change privillage of ANDROID_HOME (Enabled Normal user)
+        run: whoami=$(whoami) && sudo chown -R "$(whoami)" ${ANDROID_HOME}
+
       - name: Download Android sdkmanager
         run: |
           wget --quiet --output-document=android-sdk.zip https://dl.google.com/android/repository/sdk-tools-linux-${ANDROID_SDK_TOOLS}.zip
-          sudo mkdir -p ${ANDROID_HOME}
-          whoami=$(whoami) && sudo chown -R "$(whoami)" ${ANDROID_HOME}
           unzip android-sdk.zip -d ${ANDROID_HOME}
 
       - name: Download and Install Android image
         run: |
-          echo "y" | ${ANDROID_HOME}/bin/sdkmanager --install ${ANDROID_SDK_ID} > /dev/null 2>&1
+
+          echo "y" | ${ANDROID_HOME}/tools/bin/sdkmanager --install ${ANDROID_SDK_ID} > /dev/null 2>&1
 
       - name: Create AVD
         run: |
           sudo $ANDROID_HOME/platform-tools/adb devices
           echo "Creating emulator"
-          echo "no" | ${ANDROID_SDK_HOME}/bin/avdmanager create avd -n ${EMULATOR_NAME} -k ${ANDROID_SDK_ID} -f
+          echo "no" | ${ANDROID_SDK_HOME}/tools/bin/avdmanager create avd -n ${EMULATOR_NAME} -k ${ANDROID_SDK_ID} -f
 
       - name: Confirm Created AVD List
         run: |
           echo "Installed emulator list"
-          ${ANDROID_SDK_HOME}/bin/sdkmanager --list
+          ${ANDROID_SDK_HOME}/tools/bin/sdkmanager --list
           echo "Create emulator list"
-          ${ANDROID_SDK_HOME}/emulator -list-avds
+          ${ANDROID_SDK_HOME}/tools/emulator -list-avds
 
       - name: Start Emulator
         run: |
