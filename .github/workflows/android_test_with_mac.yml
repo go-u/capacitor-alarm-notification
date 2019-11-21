@@ -41,17 +41,6 @@ jobs:
       - name: Build with Quasar
         run: |
           cd demo && npx quasar build --mode capacitor --target android --debug
-          ls /Users/runner/runners/2.160.2/work/capacitor-alarm-notification/capacitor-alarm-notification
-          ls /Users/runner/runners/2.160.2/work/capacitor-alarm-notification/capacitor-alarm-notification/demo
-          ls /Users/runner/runners/2.160.2/work/capacitor-alarm-notification/capacitor-alarm-notification/demo/dist
-          ls /Users/runner/runners/2.160.2/work/capacitor-alarm-notification/capacitor-alarm-notification/demo/dist/capacitor
-          ls /Users/runner/runners/2.160.2/work/capacitor-alarm-notification/capacitor-alarm-notification/demo/dist/capacitor/android/
-
-      - name: Set up Appium
-        run: npm install appium
-
-      - name: Run Appium Server
-        run: ./node_modules/.bin/appium --log-timestamp --log-no-colors --allow-insecure chromedriver_autodownload > appium.log &
 
       - name: Run Android Emulator
         run: |
@@ -67,14 +56,30 @@ jobs:
       - name: Install apk
         run: $ANDROID_HOME/platform-tools/adb install demo/dist/capacitor/android/app-debug.apk
 
-      - name: Build with Gradle
-        run: gradle cleanTest test --tests "com.example.chrome.MobileChromeTest"
+      - name: Set up Appium
+        run: |
+          npm install appium
+          npm install webdriverio
+          npm install wdio-appium-service
+          npm install wdio-spec-reporter
+
+      - name: Run Appium Server
+        run: ./node_modules/.bin/appium --log-timestamp --log-no-colors --allow-insecure chromedriver_autodownload > appium.log &
+
+      - name: Test
+        run: node test/demo.js
         continue-on-error: true
+
+#      - name: Build with Gradle
+#        run: gradle cleanTest test --tests "com.example.chrome.MobileChromeTest"
+#        continue-on-error: true
+#
       - name: Upload logs
         uses: actions/upload-artifact@v1
         with:
           name: appium.log
           path: appium.log
+
       - name: Upload screenshots
         uses: actions/upload-artifact@v1
         with:
