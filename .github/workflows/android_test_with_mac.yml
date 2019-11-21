@@ -31,10 +31,10 @@ jobs:
       - name: Run Android Emulator
         run: |
           echo "y" | $ANDROID_HOME/tools/bin/sdkmanager --install ${ANDROID_SDK_ID} > /dev/null 2>&1
-          echo "no" | $ANDROID_HOME/tools/bin/avdmanager create avd -n ${emu} -k ${ANDROID_SDK_ID} --force
+          echo "no" | $ANDROID_HOME/tools/bin/avdmanager create avd -n ${EMULATOR_NAME} -k ${ANDROID_SDK_ID} --force
           echo $ANDROID_HOME/emulator/emulator -list-avds
           echo "Starting emulator"
-          nohup $ANDROID_HOME/emulator/emulator -avd ${emu} -no-snapshot > /dev/null 2>&1 &
+          nohup $ANDROID_HOME/emulator/emulator -avd ${EMULATOR_NAME} -no-snapshot > /dev/null 2>&1 &
           $ANDROID_HOME/platform-tools/adb wait-for-device shell 'while [[ -z $(getprop sys.boot_completed | tr -d '\r') ]]; do sleep 1; done; input keyevent 82'
           $ANDROID_HOME/platform-tools/adb devices
           echo "Emulator started"
