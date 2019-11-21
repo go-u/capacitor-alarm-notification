@@ -48,7 +48,6 @@ jobs:
       - name: Start AVD
         run: |
           echo "Creating emulator"
-          sudo $ANDROID_HOME/platform-tools/adb devices
           echo "no" | sudo $ANDROID_HOME/tools/bin/avdmanager create avd -n emu -k "system-images;android-28;google_apis;x86_64" --force
           echo "Installed emulator list"
           sudo $ANDROID_HOME/tools/bin/avdmanager --list
