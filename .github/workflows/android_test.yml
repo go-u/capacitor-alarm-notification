@@ -10,16 +10,12 @@ jobs:
       USER: "runner"
       ANDROID_SDK_TOOLS:    "4333796"
       ANDROID_SDK_ID:    "system-images;android-28;google_apis;x86_64"
-      ANDROID_SDK_HOME:  "/home/runner/tools"
       EMULATOR_NAME:    "emu"
     steps:
       - name: Setup And Confirm Env Value
         run : |
           whoami
-          echo $ANDROID_SDK_ROOT
-          echo ${ANDROID_SDK_HOME}
           echo ${ANDROID_HOME}
-          ls ${ANDROID_HOME}
 
       - uses: actions/checkout@v1
 #      - uses: actions/setup-node@v1
@@ -46,16 +42,13 @@ jobs:
       - name: Download Android sdkmanager
         run: |
           wget --quiet --output-document=android-sdk.zip https://dl.google.com/android/repository/sdk-tools-linux-${ANDROID_SDK_TOOLS}.zip
-          mkdir -p ${ANDROID_SDK_HOME}
-          unzip android-sdk.zip -d ${ANDROID_SDK_HOME}/..
+          mkdir -p ${ANDROID_HOME}
+          unzip android-sdk.zip -d ${ANDROID_HOME}
+          whoami=$(whoami) && sudo chown -R "$(whoami)" ${ANDROID_HOME}
 
       - name: Download and Install Android image
         run: |
-          pwd
-          ls
-          echo ${ANDROID_SDK_HOME}
-          ls ${ANDROID_SDK_HOME}
-          echo "y" | ${ANDROID_SDK_HOME}/bin/sdkmanager --install ${ANDROID_SDK_ID} > /dev/null 2>&1
+          echo "y" | ${ANDROID_HOME}/bin/sdkmanager --install ${ANDROID_SDK_ID} > /dev/null 2>&1
 
       - name: Create AVD
         run: |
