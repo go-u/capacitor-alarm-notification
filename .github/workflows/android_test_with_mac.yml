@@ -84,12 +84,11 @@ jobs:
           name: appium.log
           path: appium.log
 
-      - name: Upload screenshots
-        uses: actions/upload-artifact@v1
-        with:
-          name: screenshot.png
-          path: screenshot.png
-
+#      - name: Upload screenshots
+#        uses: actions/upload-artifact@v1
+#        with:
+#          name: screenshot.png
+#          path: screenshot.png
 
 #name: Android Test
 #
