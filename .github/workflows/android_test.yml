@@ -57,6 +57,7 @@ jobs:
           echo "Installed emulator list"
           sudo $ANDROID_HOME/tools/bin/sdkmanager --list
           echo "Create emulator list"
+          sudo export ANDROID_SDK_HOME=$HOME/.android/avd/emu
           sudo $ANDROID_HOME/emulator/emulator -list-avds
           echo "Boot emulator"
           sudo $ANDROID_HOME/emulator/emulator -avd ${EMULATOR_NAME} -no-snapshot
