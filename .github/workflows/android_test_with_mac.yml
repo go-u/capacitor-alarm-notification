@@ -30,7 +30,7 @@ jobs:
 
       - name: Run Android Emulator
         run: |
-          echo "y" | $ANDROID_HOME/tools/bin/sdkmanager --install ${ANDROID_SDK_ID}
+          echo "y" | $ANDROID_HOME/tools/bin/sdkmanager --install ${ANDROID_SDK_ID} > /dev/null 2>&1
           echo "no" | $ANDROID_HOME/tools/bin/avdmanager create avd -n ${emu} -k ${ANDROID_SDK_ID} --force
           echo $ANDROID_HOME/emulator/emulator -list-avds
           echo "Starting emulator"
