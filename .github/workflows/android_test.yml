@@ -40,16 +40,15 @@ jobs:
 #      - name: Build with Quasar
 #        run: cd demo && npx quasar build --mode capacitor --target android
 
-      - name: Install Android sdkmanager
+      - name: Download Android sdkmanager
         run: |
           wget --quiet --output-document=android-sdk.zip https://dl.google.com/android/repository/sdk-tools-linux-${ANDROID_SDK_TOOLS}.zip
-          sudo unzip -d $ANDROID_HOME android-sdk.zip > /dev/null
+          unzip android-sdk.zip
 
       - name: Install Android image
         run: |
+          echo "y" | tools/bin/sdkmanager --install "system-images;android-28;google_apis;x86_64" > /dev/null 2>&1
           sudo mkdir -p /root/.android && sudo touch /root/.android/repositories.cfg
-          echo "Install Android image"
-          echo "y" | sudo $ANDROID_HOME/tools/bin/sdkmanager --install "system-images;android-28;google_apis;x86_64" > /dev/null 2>&1
 
       - name: Start AVD
         run: |
