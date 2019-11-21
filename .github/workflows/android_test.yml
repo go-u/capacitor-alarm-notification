@@ -16,6 +16,7 @@ jobs:
       - name: Setup And Confirm Env Value
         run : |
           whoami
+          echo $ANDROID_SDK_ROOT
           echo ${ANDROID_SDK_HOME}
           echo ${ANDROID_HOME}
           ls ${ANDROID_HOME}
@@ -71,7 +72,6 @@ jobs:
 
       - name: Start Emulator
         run: |
-          echo "Boot emulator"
           ${ANDROID_SDK_HOME}/emulator -avd ${EMULATOR_NAME} -no-snapshot
           ${ANDROID_SDK_HOME}/emulator -avd ${EMULATOR_NAME} -no-snapshot > /dev/null 2>&1 &
 
