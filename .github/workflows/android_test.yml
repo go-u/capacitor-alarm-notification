@@ -48,21 +48,20 @@ jobs:
 
       - name: Download and Install Android image
         run: |
-          ls $ANDROID_SDK_HOME
-          echo "y" | $ANDROID_SDK_HOME/bin/sdkmanager --install ${ANDROID_SDK_ID} > /dev/null 2>&1
+          echo "y" | ${ANDROID_SDK_HOME}/bin/sdkmanager --install ${ANDROID_SDK_ID} > /dev/null 2>&1
 
       - name: Create AVD
         run: |
           sudo $ANDROID_HOME/platform-tools/adb devices
           echo "Creating emulator"
-          echo "no" | $ANDROID_SDK_HOME/bin/avdmanager create avd -n ${EMULATOR_NAME} -k ${ANDROID_SDK_ID} -f
+          echo "no" | ${ANDROID_SDK_HOME}/bin/avdmanager create avd -n ${EMULATOR_NAME} -k ${ANDROID_SDK_ID} -f
 
       - name: Confirm Created AVD List
         run: |
           echo "Installed emulator list"
-          $ANDROID_SDK_HOME/bin/sdkmanager --list
+          ${ANDROID_SDK_HOME}/bin/sdkmanager --list
           echo "Create emulator list"
-          $ANDROID_SDK_HOME/emulator -list-avds
+          ${ANDROID_SDK_HOME}/emulator -list-avds
 
       - name: Start AVD
         run: |
