@@ -10,7 +10,7 @@ jobs:
       ANDROID_SDK_TOOLS:    "4333796"
       ANDROID_SDK_ID:    "system-images;android-28;google_apis;x86_64"
       EMULATOR_NAME:    "emu"
-      ANDROID_SDK_HOME: $HOME/android/avd/emu
+      ANDROID_SDK_HOME: /home/runner/android/avd/emu
     steps:
       - uses: actions/checkout@v1
 #      - uses: actions/setup-node@v1
