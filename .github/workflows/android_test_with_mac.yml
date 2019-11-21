@@ -15,9 +15,9 @@ jobs:
       EMULATOR_NAME:    "emu"
 
       steps:
-        - name: Setup And Confirm Env Value
-          run : |
-            whoami
+      - name: Setup And Confirm Env Value
+        run : |
+          whoami
           echo ${ANDROID_HOME}
 
       - name: Checkout source code
