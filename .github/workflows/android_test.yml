@@ -54,7 +54,7 @@ jobs:
           sudo $ANDROID_HOME/emulator/emulator -list-avds
           $ANDROID_HOME/emulator/emulator -list-avds
           echo "Boot emulator"
-          sudo nohup $ANDROID_HOME/emulator/emulator -avd ${EMULATOR_NAME} -no-snapshot > /dev/null 2>&1 &
+          sudo $ANDROID_HOME/emulator/emulator -avd ${EMULATOR_NAME} -no-snapshot > /dev/null 2>&1 &
           sudo $ANDROID_HOME/platform-tools/adb wait-for-device shell 'while [[ -z $(getprop sys.boot_completed | tr -d '\r') ]]; do sleep 1; done; input keyevent 82'
           sudo $ANDROID_HOME/platform-tools/adb devices
           echo "Emulator started"
