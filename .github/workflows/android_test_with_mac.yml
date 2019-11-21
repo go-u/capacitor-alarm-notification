@@ -19,12 +19,15 @@ jobs:
           run : |
             whoami
           echo ${ANDROID_HOME}
+
       - name: Checkout source code
         uses: actions/checkout@v1
+
       - name: Set up Node.js
         uses: actions/setup-node@v1
         with:
           node-version: '12.x'
+
       - name: Run Android Emulator
         run: |
           echo "y" | $ANDROID_HOME/tools/bin/sdkmanager --install ${ANDROID_SDK_ID}
@@ -35,10 +38,27 @@ jobs:
           $ANDROID_HOME/platform-tools/adb wait-for-device shell 'while [[ -z $(getprop sys.boot_completed | tr -d '\r') ]]; do sleep 1; done; input keyevent 82'
           $ANDROID_HOME/platform-tools/adb devices
           echo "Emulator started"
+
       - name: Set up Appium
         run: npm install appium
+
       - name: Run Appium Server
         run: ./node_modules/.bin/appium --log-timestamp --log-no-colors --allow-insecure chromedriver_autodownload > appium.log &
+
+      - name: BuildCapacitorPlugin(This plugin itself)
+        run: |
+          npm install
+          npm run build
+
+      - name: Insatall Quasar
+        run: cd demo && yarn install
+
+      - name: Build with Quasar
+        run: cd demo && npx quasar build --mode capacitor --target android
+
+      - name: Install apk
+        run: $ANDROID_HOME/platform-tools/adb install /home/runner/work/capacitor-alarm-notification/capacitor-alarm-notification/demo/dist/capacitor/android/app-release-unsigned.apk
+
       - name: Build with Gradle
         run: gradle cleanTest test --tests "com.example.chrome.MobileChromeTest"
         continue-on-error: true
@@ -119,16 +139,6 @@ jobs:
 #          echo "Create emulator list"
 #          ${ANDROID_HOME}/tools/emulator -list-avds
 #
-#      - name: Start Emulator
-#        run: |
-#          git clone https://gitlab.freedesktop.org/pulseaudio/pulseaudio.git
-#          cd pulseaudio && ./bootstrap.sh
-#          cd pulseaudio && make
-#          cd pulseaudio && sudo make install
-#          cp ${ANDROID_HOME}/tools/emulator ${ANDROID_HOME}/emulator/emulator
-#          cd ${ANDROID_HOME}/emulator && ./emulator -avd ${EMULATOR_NAME} -no-snapshot
-#          cd ${ANDROID_HOME}/emulator && ./emulator -avd ${EMULATOR_NAME} -no-snapshot > /dev/null 2>&1 &
-#
 #      - name: Connect Emulator to ADB
 #        run: |
 #          ${ANDROID_HOME}/platform-tools/adb wait-for-device shell 'while [[ -z $(getprop sys.boot_completed | tr -d '\r') ]]; do sleep 1; done; input keyevent 82'
@@ -137,25 +147,3 @@ jobs:
 #
 #      - name: Install App to emulator
 #        run: sudo ${ANDROID_HOME}/platform-tools/adb install /home/runner/work/capacitor-alarm-notification/capacitor-alarm-notification/demo/dist/capacitor/android/app-release-unsigned.apk
-#
-#      - name: Set up Appium
-#        run: sudo npm install appium -g
-##
-#      - name: Run Appium Server
-#        run: sudo appium --log-timestamp --log-no-colors --allow-insecure chromedriver_autodownload > appium.log &
-#
-##      - name: Build with Gradle
-##        run: cd demo/src-capacitor/android/ && gradle compileJava
-##        continue-on-error: true
-#
-##      - name: Upload logs
-##        uses: actions/upload-artifact@v1
-##        with:
-##          name: appium.log
-##          path: appium.log
-##
-##      - name: Upload screenshots
-##        uses: actions/upload-artifact@v1
-##        with:
-##          name: screenshots
-##          path: screenshots
