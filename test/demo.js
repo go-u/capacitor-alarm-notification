@@ -7,7 +7,7 @@ const opts = {
   port: 4723,
   capabilities: {
     platformName: "Android",
-    platformVersion: "8.1.0",
+    platformVersion: "9",
     deviceName: "emu",
     app: "demo/dist/capacitor/android/app-debug.apk",
     appPackage: "com.demo.capacitor.alarm.notification",
