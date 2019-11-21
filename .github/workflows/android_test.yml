@@ -72,8 +72,7 @@ jobs:
       - name: Start Emulator
         run: |
           echo "Boot emulator"
-          sudo ${ANDROID_HOME}/emulator/emulator -avd ${EMULATOR_NAME} -no-snapshot
-          sudo ${ANDROID_HOME}/emulator/emulator -avd ${EMULATOR_NAME} -no-snapshot > /dev/null 2>&1 &
+          /home/runner/tools/emulator -avd emu -no-snapshot
 
       - name: Connect Emulator to ADB
         run: |
