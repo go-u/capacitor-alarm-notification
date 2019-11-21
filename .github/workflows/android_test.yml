@@ -48,7 +48,6 @@ jobs:
       - name: Install Android image
         run: |
           echo "y" | tools/bin/sdkmanager --install "system-images;android-28;google_apis;x86_64" > /dev/null 2>&1
-          sudo mkdir -p /root/.android && sudo touch /root/.android/repositories.cfg
 
       - name: Start AVD
         run: |
