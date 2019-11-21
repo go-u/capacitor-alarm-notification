@@ -9,11 +9,12 @@ jobs:
     env:
       USER: "runner"
       ANDROID_SDK_TOOLS:    "4333796"
-      ANDROID_SDK_ID:    "system-images;android-28;google_apis;x86"
+      ANDROID_SDK_ID:    "system-images;android-28;google_apis;x86_64"
       EMULATOR_NAME:    "emu"
     steps:
       - name: Setup And Confirm Env Value
         run : |
+          sudo apt-get install libbz2-1.0:i386
           whoami
           echo ${ANDROID_HOME}
 
