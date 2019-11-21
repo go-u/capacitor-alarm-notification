@@ -28,23 +28,6 @@ jobs:
         with:
           node-version: '12.x'
 
-      - name: Run Android Emulator
-        run: |
-          echo "y" | $ANDROID_HOME/tools/bin/sdkmanager --install ${ANDROID_SDK_ID} > /dev/null 2>&1
-          echo "no" | $ANDROID_HOME/tools/bin/avdmanager create avd -n ${EMULATOR_NAME} -k ${ANDROID_SDK_ID} --force
-          echo $ANDROID_HOME/emulator/emulator -list-avds
-          echo "Starting emulator"
-          nohup $ANDROID_HOME/emulator/emulator -avd ${EMULATOR_NAME} -no-snapshot > /dev/null 2>&1 &
-          $ANDROID_HOME/platform-tools/adb wait-for-device shell 'while [[ -z $(getprop sys.boot_completed | tr -d '\r') ]]; do sleep 1; done; input keyevent 82'
-          $ANDROID_HOME/platform-tools/adb devices
-          echo "Emulator started"
-
-      - name: Set up Appium
-        run: npm install appium
-
-      - name: Run Appium Server
-        run: ./node_modules/.bin/appium --log-timestamp --log-no-colors --allow-insecure chromedriver_autodownload > appium.log &
-
       - name: BuildCapacitorPlugin(This plugin itself)
         run: |
           npm install
@@ -55,6 +38,23 @@ jobs:
 
       - name: Build with Quasar
         run: cd demo && npx quasar build --mode capacitor --target android
+
+      - name: Set up Appium
+        run: npm install appium
+
+      - name: Run Appium Server
+        run: ./node_modules/.bin/appium --log-timestamp --log-no-colors --allow-insecure chromedriver_autodownload > appium.log &
+
+      - name: Run Android Emulator
+        run: |
+          echo "y" | $ANDROID_HOME/tools/bin/sdkmanager --install ${ANDROID_SDK_ID} > /dev/null 2>&1
+          echo "no" | $ANDROID_HOME/tools/bin/avdmanager create avd -n ${EMULATOR_NAME} -k ${ANDROID_SDK_ID} --force
+          echo $ANDROID_HOME/emulator/emulator -list-avds
+          echo "Starting emulator"
+          nohup $ANDROID_HOME/emulator/emulator -avd ${EMULATOR_NAME} -no-snapshot > /dev/null 2>&1 &
+          $ANDROID_HOME/platform-tools/adb wait-for-device shell 'while [[ -z $(getprop sys.boot_completed | tr -d '\r') ]]; do sleep 1; done; input keyevent 82'
+          $ANDROID_HOME/platform-tools/adb devices
+          echo "Emulator started"
 
       - name: Install apk
         run: $ANDROID_HOME/platform-tools/adb install /home/runner/work/capacitor-alarm-notification/capacitor-alarm-notification/demo/dist/capacitor/android/app-release-unsigned.apk
