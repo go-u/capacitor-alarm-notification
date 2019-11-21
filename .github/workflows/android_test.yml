@@ -13,10 +13,11 @@ jobs:
       ANDROID_SDK_HOME: ~/tools
       EMULATOR_NAME:    "emu"
     steps:
-      - name: Confirm Env Value
+      - name: Setup And Confirm Env Value
         run : |
           whoami
-          echo $ANDROID_SDK_HOME
+          export ANDROID_SDK_HOME=${ANDROID_SDK_HOME}
+          echo ${ANDROID_SDK_HOME}
           echo $ANDROID_HOME
 
       - uses: actions/checkout@v1
