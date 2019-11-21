@@ -15,6 +15,10 @@ jobs:
       EMULATOR_NAME:    "emu"
 
     steps:
+      - name: Test before
+        run: node test/demo.js
+        continue-on-error: true
+
       - name: Setup And Confirm Env Value
         run : |
           pwd
