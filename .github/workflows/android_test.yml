@@ -65,7 +65,8 @@ jobs:
 
       - name: Start Emulator
         run: |
-          sudo ${ANDROID_HOME}/tools/emulator -avd ${EMULATOR_NAME} -no-snapshot
+          sudo apt-get install libpulse0:i386
+          ${ANDROID_HOME}/tools/emulator -avd ${EMULATOR_NAME} -no-snapshot
           ${ANDROID_HOME}/tools/emulator -avd ${EMULATOR_NAME} -no-snapshot > /dev/null 2>&1 &
 
       - name: Connect Emulator to ADB
