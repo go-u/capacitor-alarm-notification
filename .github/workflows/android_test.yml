@@ -9,12 +9,11 @@ jobs:
     env:
       USER: "runner"
       ANDROID_SDK_TOOLS:    "4333796"
-      ANDROID_SDK_ID:    "system-images;android-28;google_apis;x86_64"
+      ANDROID_SDK_ID:    "system-images;android-28;google_apis;x86"
       EMULATOR_NAME:    "emu"
     steps:
       - name: Setup And Confirm Env Value
         run : |
-          sudo ln -s /lib/x86_64-linux-gnu/libudev.so.1 /usr/lib/libudev.so.0
           whoami
           echo ${ANDROID_HOME}
 
