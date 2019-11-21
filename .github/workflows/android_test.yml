@@ -11,7 +11,6 @@ jobs:
       ANDROID_SDK_TOOLS:    "4333796"
       ANDROID_SDK_ID:    "system-images;android-28;google_apis;x86_64"
       EMULATOR_NAME:    "emu"
-      ANDROID_SDK_HOME: "/home/runner/.android/avd/emu"
     steps:
       - name: env val
         run : |
@@ -49,17 +48,21 @@ jobs:
         run: |
           echo "y" | tools/bin/sdkmanager --install ${ANDROID_SDK_ID} > /dev/null 2>&1
 
-      - name: Start AVD
+      - name: Create AVD
         run: |
           sudo $ANDROID_HOME/platform-tools/adb devices
           echo "Creating emulator"
-          echo "no" | sudo $ANDROID_HOME/tools/bin/avdmanager create avd -n ${EMULATOR_NAME} -k ${ANDROID_SDK_ID} -f -p $HOME/.android/avd/emu
-          echo "ls $HOME/.android/avd/emu"
-          sudo ls $HOME/.android/avd/emu
+          echo "no" | tools/bin/avdmanager create avd -n ${EMULATOR_NAME} -k ${ANDROID_SDK_ID} -f
+
+      - name: Confirm Created AVD List
+        run: |
           echo "Installed emulator list"
-          sudo $ANDROID_HOME/tools/bin/sdkmanager --list
+          tools/bin/sdkmanager --list
           echo "Create emulator list"
           sudo $ANDROID_HOME/emulator/emulator -list-avds
+
+      - name: Start AVD
+        run: |
           echo "Boot emulator"
           sudo $ANDROID_HOME/emulator/emulator -avd ${EMULATOR_NAME} -no-snapshot
           sudo $ANDROID_HOME/emulator/emulator -avd ${EMULATOR_NAME} -no-snapshot > /dev/null 2>&1 &
