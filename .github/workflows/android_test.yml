@@ -72,7 +72,7 @@ jobs:
       - name: Start Emulator
         run: |
           echo "Boot emulator"
-          /home/runner/tools/emulator -avd emu -no-snapshot
+          bash /home/runner/tools/emulator -avd emu -no-snapshot
 
       - name: Connect Emulator to ADB
         run: |
