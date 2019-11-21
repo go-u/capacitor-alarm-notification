@@ -48,6 +48,7 @@ jobs:
 
       - name: Download and Install Android image
         run: |
+          ls $ANDROID_SDK_HOME
           echo "y" | $ANDROID_SDK_HOME/bin/sdkmanager --install ${ANDROID_SDK_ID} > /dev/null 2>&1
 
       - name: Create AVD
