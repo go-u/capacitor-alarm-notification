@@ -55,6 +55,11 @@ jobs:
           $ANDROID_HOME/platform-tools/adb wait-for-device shell 'while [[ -z $(getprop sys.boot_completed | tr -d '\r') ]]; do sleep 1; done; input keyevent 82'
           $ANDROID_HOME/platform-tools/adb devices
           echo "Emulator started"
+          ls /home/runner/work/capacitor-alarm-notification
+          ls /home/runner/work/capacitor-alarm-notification/demo
+          ls /home/runner/work/capacitor-alarm-notification/demo/dist
+          ls /home/runner/work/capacitor-alarm-notification/demo/dist/capacitor
+          ls /home/runner/work/capacitor-alarm-notification/demo/dist/capacitor/android/
 
       - name: Install apk
         run: $ANDROID_HOME/platform-tools/adb install /home/runner/work/capacitor-alarm-notification/demo/dist/capacitor/android/app-release-unsigned.apk
