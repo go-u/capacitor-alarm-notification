@@ -72,8 +72,8 @@ jobs:
 
       - name: Connect Emulator to ADB
         run: |
-          sudo ${ANDROID_HOME}/platform-tools/adb wait-for-device shell 'while [[ -z $(getprop sys.boot_completed | tr -d '\r') ]]; do sleep 1; done; input keyevent 82'
-          sudo ${ANDROID_HOME}/platform-tools/adb devices
+          ${ANDROID_HOME}/platform-tools/adb wait-for-device shell 'while [[ -z $(getprop sys.boot_completed | tr -d '\r') ]]; do sleep 1; done; input keyevent 82'
+          ${ANDROID_HOME}/platform-tools/adb devices
           echo "Emulator Connected"
 
       - name: Install App to emulator
