@@ -43,7 +43,7 @@ jobs:
       - name: Install Android image
         run: |
           echo "Install Android image"
-          echo "y" | sudo $ANDROID_HOME/tools/bin/sdkmanager --install ${ANDROID_SDK_ID} &
+          echo "y" | sudo $ANDROID_HOME/tools/bin/sdkmanager --install ${ANDROID_SDK_ID} > /dev/null 2>&1
 
       - name: Start AVD
         run: |
