@@ -44,7 +44,8 @@ jobs:
       - name: Download Android sdkmanager
         run: |
           wget --quiet --output-document=android-sdk.zip https://dl.google.com/android/repository/sdk-tools-linux-${ANDROID_SDK_TOOLS}.zip
-          unzip android-sdk.zip
+          mkdir -p ${ANDROID_SDK_HOME}
+          unzip android-sdk.zip -d /home/runner
 
       - name: Download and Install Android image
         run: |
