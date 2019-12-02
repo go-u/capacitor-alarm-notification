@@ -23,7 +23,7 @@ Developing
 # Set up
 ## Install Plugin
 ```
-npm install capacitor-keep-screen-on
+npm install capacitor-alarm-notification
 ```
 ## Sync to Capacitor project
 ```
