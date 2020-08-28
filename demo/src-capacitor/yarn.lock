@@ -26,6 +26,13 @@
   dependencies:
     tslib "^1.9.0"
 
+"@capacitor/core@^1.4.0":
+  version "1.5.2"
+  resolved "https://registry.yarnpkg.com/@capacitor/core/-/core-1.5.2.tgz#c32db9fa5659c4327ac467c5eaf47391191683b5"
+  integrity sha512-0UPJUzwVrPM4YY4BPLr6oypmn8FYF7iaOYujAtUtOfQjuoAvg7c5DKdZ8LOQtsuG6JqsIsTcqZ6w8nGQQ+g0YQ==
+  dependencies:
+    tslib "^1.9.0"
+
 ansi-escapes@^3.2.0:
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/ansi-escapes/-/ansi-escapes-3.2.0.tgz#8780b98ff9dbf5638152d1f1fe5c1d7b4442976b"
@@ -52,6 +59,11 @@ base64-js@^1.2.3:
   version "1.3.1"
   resolved "https://registry.yarnpkg.com/base64-js/-/base64-js-1.3.1.tgz#58ece8cb75dd07e71ed08c736abc5fac4dbf8df1"
   integrity sha512-mLQ4i2QO1ytvGWFWmcngKO//JXAQueZvwEKtjgQFM4jIK0kU+ytMfplL8j+n5mspOfjHwoAg+9yhb7BwAHm36g==
+
+"capacitor-alarm-notification@file:../..":
+  version "0.0.1"
+  dependencies:
+    "@capacitor/core" "^1.4.0"
 
 chalk@^2.0.1, chalk@^2.1.0, chalk@^2.3.0, chalk@^2.4.2:
   version "2.4.2"
@@ -273,9 +285,9 @@ jsonfile@^4.0.0:
     graceful-fs "^4.1.6"
 
 lodash@^4.17.11:
-  version "4.17.15"
-  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.15.tgz#b447f6670a0455bbfeedd11392eff330ea097548"
-  integrity sha512-8xOcRHvCjnocdS5cpwXQXVzmmh5e5+saE2QGoeQmbKmRS6J3VQppPOIt0MnmE+4xlZoumy0GPG0D0MVIQbNA1A==
+  version "4.17.19"
+  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.19.tgz#e48ddedbe30b3321783c5b4301fbd353bc1e4a4b"
+  integrity sha512-JNvd8XER9GQX0v2qJgsaN/mzFCNA5BRe/j8JN9d+tWyGLSodKQHKFicdwNYzWwI3wjRnaKPsGj1XkBjx/F96DQ==
 
 log-symbols@^2.1.0:
   version "2.2.0"
